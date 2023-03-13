@@ -6,8 +6,9 @@
 #define FAILURE 0
 
 #define OK 0
-#define Err 1
-#define ErrOper 2
+#define Err 1 // Ошибка, некорректная матрица
+#define ErrOper 2 // Ошибка вычисления 
+// (несовпадающие размеры матриц; матрица, для которой нельзя провести вычисления и т.д.)
 
 typedef struct matrix_struct {
   double **matrix;
@@ -25,3 +26,4 @@ int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result);
 
 int s21_mult_number(matrix_t *A, double number, matrix_t *result);
 int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result);
+int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result);

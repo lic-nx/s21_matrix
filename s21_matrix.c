@@ -113,3 +113,20 @@ int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result){
   int returned = OK;
   return returned;
 }
+
+int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result){
+ int returned = OK;
+ s21_create_matrix(A->rows, B->columns, result);
+ if(A->rows == B->columns){
+   int res = 0; 
+   for(int j = 0; j< A->rows; j++){
+    for(int i = 0; i< A->columns; i++){
+      res += A->matrix[j][i] * B->matrix[i][j];
+    }
+   }
+ }
+ else{
+   returned = ErrOper;
+ }
+ return returned;
+}
