@@ -29,7 +29,12 @@ int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result);
 
 
 int s21_transpose(matrix_t *A, matrix_t *result);
-
+// добавить миноры 
 //int s21_calc_complements(matrix_t *A, matrix_t *result);
 int s21_determinant(matrix_t *A, double *result);
 double revers_determinant(matrix_t *A);
+
+int minor(matrix_t *A, int i, int j, matrix_t *result);
+
+//Обратная матрица
+int s21_inverse_matrix(matrix_t *A, matrix_t *result);

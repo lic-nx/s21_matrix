@@ -170,10 +170,11 @@ int minor(matrix_t *A, int i, int j, matrix_t *result){
   return err;
 }
 
+// определитель матрицы через 
 int s21_determinant(matrix_t *A, double *result){
   int returned = OK;
   if(A->columns == A->rows){
-    
+    *result = revers_determinant(A);
   }
   return returned;
 }
@@ -191,4 +192,12 @@ double revers_determinant(matrix_t *A){
     }
   }
   return result;
+}
+
+int s21_inverse_matrix(matrix_t *A, matrix_t *result){
+  int returned = OK;
+  double determ;
+  returned = s21_determinant(A, *determ);
+  
+  return returned;
 }
