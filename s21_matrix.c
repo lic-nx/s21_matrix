@@ -197,7 +197,7 @@ double revers_determinant(matrix_t *A){
 int s21_inverse_matrix(matrix_t *A, matrix_t *result){
   int returned = OK;
   double determ;
-  returned = s21_determinant(A, *determ);
+  returned = s21_determinant(A, &determ);
   
   return returned;
 }
