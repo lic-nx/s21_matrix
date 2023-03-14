@@ -109,24 +109,61 @@ int s21_mult_number(matrix_t *A, double number, matrix_t *result){
   } else {returned = 1;}
   return returned;
 }
+
+
 int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result){
   int returned = OK;
+  if(A->rows == B->columns){
+    returned = s21_create_matrix(A->rows, B->columns, result);
+    if(returned == OK){
+      double res = 0; 
+      for(int i = 0; i < A->rows; i++){
+        for(int j = 0; j < B->columns; j++){
+          for(int k = 0; k < B->rows; k++) {
+            result->matrix[i][j] = A->matrix[i][k] * B->matrix[k][i];
+          }
+        }
+      }
+    }
+  }
+  else{
+    returned = ErrOper;
+  }
   return returned;
 }
 
-int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result){
- int returned = OK;
- s21_create_matrix(A->rows, B->columns, result);
- if(A->rows == B->columns){
-   int res = 0; 
-   for(int j = 0; j< A->rows; j++){
-    for(int i = 0; i< A->columns; i++){
-      res += A->matrix[j][i] * B->matrix[i][j];
+int s21_transpose(matrix_t *A, matrix_t *result){
+  int returned = OK;
+  returned = s21_create_matrix(A->columns, A->rows, result);
+  if(returned == OK){
+    for(int i = 0; i < A->rows; i++){
+      for(int j = 0; j < A->columns; j++){
+        result->matrix[j][i] = A->matrix[i][j];
+      }
     }
-   }
- }
- else{
-   returned = ErrOper;
- }
- return returned;
+  }
+  return returned;
+  }
+
+// минор 
+// int s21_calc_complements(matrix_t *A, matrix_t *result){
+
+// }
+
+int s21_determinant(matrix_t *A, double *result){
+  int returned = OK;
+  if(A->columns == A->rows){
+    matrix_t matr;
+    returned = s21_create_matrix((A->rows-1), (A->columns-1), &matr);
+    if(A->rows == 2){
+      *result = A->matrix[0][0]*A->matrix[1][1] - A->matrix[0][1] * A->matrix[1][0];
+    }
+    else {
+      
+    }
+  }
+  else{
+    returned = 1;
+  }
+  return returned;
 }
