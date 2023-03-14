@@ -153,17 +153,19 @@ int s21_transpose(matrix_t *A, matrix_t *result){
 int s21_determinant(matrix_t *A, double *result){
   int returned = OK;
   if(A->columns == A->rows){
-    matrix_t matr;
-    returned = s21_create_matrix((A->rows-1), (A->columns-1), &matr);
-    if(A->rows == 2){
-      *result = A->matrix[0][0]*A->matrix[1][1] - A->matrix[0][1] * A->matrix[1][0];
-    }
-    else {
+    
+  }
+  return returned;
+}
+
+double revers_determinant(matrix_t *A, double result){
+  if(A->rows == 2){
+    result = A->matrix[0][0]*A->matrix[1][1] - A->matrix[0][1]*A->matrix[1][0];
+
+  }else {
+    for(int i = 0; i < A->rows; i++){
       
     }
   }
-  else{
-    returned = 1;
-  }
-  return returned;
+  return result;
 }
