@@ -150,6 +150,26 @@ int s21_transpose(matrix_t *A, matrix_t *result){
 
 // }
 
+int minor(matrix_t *A, int i, int j, matrix_t *result){
+  int m=0, n=0;
+  int err = OK;
+  err = s21_create_matrix(A->columns-1, A->rows-1, &result);
+  //  добавить проверки на ошибку 
+  for (int rows = 0; rows < A->rows; rows++){
+    m = rows;
+    for (int columns = 0; columns < A->columns; columns++){
+      n = columns;
+      if(rows >= i )
+        m-- ;
+      if(columns >= j)
+        n--;
+      if(rows != i && columns != j)
+        result->matrix[m][n] = A->matrix[i][j];
+    }
+  }
+  return err;
+}
+
 int s21_determinant(matrix_t *A, double *result){
   int returned = OK;
   if(A->columns == A->rows){
@@ -158,13 +178,16 @@ int s21_determinant(matrix_t *A, double *result){
   return returned;
 }
 
-double revers_determinant(matrix_t *A, double result){
+double revers_determinant(matrix_t *A){
+  double result = 0;
   if(A->rows == 2){
     result = A->matrix[0][0]*A->matrix[1][1] - A->matrix[0][1]*A->matrix[1][0];
 
   }else {
     for(int i = 0; i < A->rows; i++){
-      
+      matrix_t determ;
+      minor(A, 0, i, &determ);
+      result +=pow((-1),i) * A->matrix[0][i] * revers_determinant(&determ);
     }
   }
   return result;
