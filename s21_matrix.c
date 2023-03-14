@@ -198,6 +198,18 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result){
   int returned = OK;
   double determ;
   returned = s21_determinant(A, &determ);
-  
+  if(returned == OK){
+    returned = s21_create_matrix(A->columns, A->rows, result);
+    if(returned == OK){
+      for(int i = 0; i < A->columns; i++){
+        for(int j = 0; j < A->rows; j++){
+          result->matrix[i][j] = 1/A->matrix[i][j];
+        }
+      }
+      matrix_t Atrans;
+      s21_mult_matrix(result,);
+
+    }
+  }
   return returned;
 }
